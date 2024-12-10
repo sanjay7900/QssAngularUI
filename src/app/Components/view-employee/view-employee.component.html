@@ -1,0 +1,46 @@
+
+
+<div class="container">
+  <h1 id ="employee-header">Employee Management System</h1>
+  <h3>Search Employees</h3>
+  <div class="d-flex justify-content-between align-items-center">
+    <!-- Search Input Field -->
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by name or city"
+      [(ngModel)]="searchTerm"
+      name="search"
+      style="max-width: 400px;"
+    />
+    <button class="btn btn-success" (click) = 'AddEmployee()'>Add Employee</button>
+  </div>
+  <div class ="scroll">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let header of tableHeaders">{{ header }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData; let rowIndex = index">
+            @if(row | filterEmployee:searchTerm)
+            {
+              <td>{{ rowIndex + 1 }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.salary }}</td>
+              <td>{{ row.position }}</td>
+              <td>{{ row.email }}</td>
+              <td>{{departments |filterdepartment:row.department}}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="UpdateLinK(row.id)">Update</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteEmployee(row.id)">Delete</button>
+              </td>
+            }
+          </tr>
+        </tbody>
+    </table>
+  </div>
+  </div>
+ 
